@@ -42,14 +42,14 @@ function App() {
         <div className="side-a">HEADS</div>
         <div className="side-b">TAILS</div>
       </div>
-      <button onClick={() => coinFlip()} disabled={flipping} className="flipper">
+      <button onClick={coinFlip} disabled={flipping} className="flipper">
       {flipping ? 'Flipping...' : 'Flip'}
       </button>
 
       <div className="counter">
         <p>Heads Count: {headsCount}</p>
         <p>Tails Count: {tailsCount}</p>
-        <button className="reset" onClick={() => resetCount()}>Reset</button>
+        <button className="reset" onClick={resetCount}>Reset</button>
       </div>
     </div>
   );

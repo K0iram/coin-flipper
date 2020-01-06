@@ -8,9 +8,9 @@ function App() {
   const [tailsCount, setTailsCount] = useState(0)
 
   const coinFlip = () => {
+    let flipResult = Math.random();
     setFlipping(true)
     setSide('')
-    let flipResult = Math.random();
     
     setTimeout(() => {
       if(flipResult <= 0.5){

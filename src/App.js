@@ -1,24 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [side, setSide] = useState("");
+  const [flipping, setFlipping] = useState(false);
+  const [headsCount, setHeadsCount] = useState(0)
+  const [tailsCount, setTailsCount] = useState(0)
+
+  const coinFlip = () => {
+    setFlipping(true)
+    setSide('')
+    let flipResult = Math.random();
+    
+    setTimeout(() => {
+      if(flipResult <= 0.5){
+        setSide('heads')
+        setTimeout(() => { 
+          setHeadsCount(headsCount + 1)
+          setFlipping(false)
+        }, 3000)
+      }
+      else{
+        setSide('tails')
+        setTimeout(() => { 
+          setTailsCount(tailsCount + 1)
+          setFlipping(false)
+        }, 3000)
+      }
+    }, 100);
+  }
+
+  const resetCount = () => {
+    setHeadsCount(0)
+    setTailsCount(0)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Coin Flipper</h1>
+      <div id="coin" className={side}>
+        <div className="side-a">HEADS</div>
+        <div className="side-b">TAILS</div>
+      </div>
+      <button onClick={() => coinFlip()} disabled={flipping} className="flipper">
+      {flipping ? 'Flipping...' : 'Flip'}
+      </button>
+
+      <div className="counter">
+        <p>Heads Count: {headsCount}</p>
+        <p>Tails Count: {tailsCount}</p>
+        <button className="reset" onClick={() => resetCount()}>Reset</button>
+      </div>
     </div>
   );
 }
